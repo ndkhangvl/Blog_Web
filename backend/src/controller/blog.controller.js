@@ -32,22 +32,24 @@ exports.findAllUser = (req, res) => {
     return res.send({message: 'findAllUser user handler'});
 };
 
-//const ContactService = require('../services/blog.service');
+const BlogService = require('../services/blog.service');
 const ApiError = require('../api-error');
 
-exports.create = async(req, res, next) => {
-    if(!req.body?.name) {
-        return next(new ApiError(400, 'Name can not be empty'));
+exports.signUp = async(req, res, next) => {
+    if(!req.body?.user_usname) {
+        return next(new ApiError(400, 'Username can not be empty'));
     }
-
-    // try {
-    //     const contactService = new ContactService();
-    //     const contact = await contactService.create(req.body);
-    //     return res.send(contact);        
-    // } catch (error) {
-    //     console.log(error);
-    //     return next(
-    //         new ApiError(500, ' An error occured while creating the contact')
-    //     );
-    // }
+    if(!req.body?.user_passwd) {
+        return next(new ApiError(400, 'Password can not be empty'));
+    }
+    try {
+        const blogService = new BlogService();
+        const user = await blogService.signUp(req.body);
+        return res.send(user);        
+    } catch (error) {
+        console.log(error);
+        return next(
+            new ApiError(500, ' An error occured while creating the user')
+        );
+    }
 }
