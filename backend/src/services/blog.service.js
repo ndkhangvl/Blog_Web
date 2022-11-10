@@ -6,7 +6,7 @@ class BlogService {
         this.likes = knex('likes');
     }
 
-    //Define methods for accessing the database
+    //Define methods for accessing the database //USER
     #getUser(payload) {
         const user = { ...payload };
         const userProperties = [
@@ -25,6 +25,55 @@ class BlogService {
         const user = this.#getUser(payload);
         const [user_id] = await this.users.insert(user);
         return { user_id, ...user };
+    }
+
+    async allUser() {
+        return await this.users.select('*');
+    }
+    async findByUsername(keyword) {
+        return await this.users
+            .where('user_name', 'like', `%${keyword}%`)
+            .orWhere('user_usname', 'like', `%${keyword}%`)
+            .select('*');
+    }
+
+    async findByUserId(username){
+        return await this.users.where('user_usname', username).select('*').first();
+    }
+
+    async updateUser(username, payload) {
+        const update = this.#getUser(payload);
+        return await this.users.where('user_usname', username).update(update);
+    }
+
+    //Define methods for accessing the database //POST
+    #getPost(payload) {
+        const post = { ...payload };
+        const postProperties = [
+            "user_id", "post_dateUp", "post_title", "post_content"
+        ];
+        //Remove non-user properties
+        Object.keys(post).forEach(function(key) {
+            if(postProperties.indexOf(key) == -1) {
+                delete post[key];
+            }
+        });
+        return post;
+    }
+
+    async createPost(payload) {
+        const post = this.#getPost(payload);
+        const [post_id] = await this.posts.insert(post);
+        return { post_id, ...post };
+    }
+
+    async allPost() {
+        return await this.posts.select('*');
+    }
+    async findByTitle(keyword) {
+        return await this.posts
+            .where('post_title', 'like', `%${keyword}%`)
+            .select('*');
     }
 }
 
