@@ -30,6 +30,12 @@ app.route('/api/users/:username')
     .get(blogController.seeDetailUser)
     .put(blogController.updateUser);
 
+app.route('/api/users/:username/change-password')
+    .put(blogController.updatePass);
+//route for like
+app.route('/api/likes')
+    .put(blogController.changeLikeState);
+
 //Link Error 404 and status code 500
 const ApiError = require('./api-error');
 app.use((req, res, next) => {
