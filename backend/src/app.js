@@ -4,6 +4,8 @@ const cors = require('cors');
 const app = express();
 
 const blogController = require('./controller/blog.controller');
+const userController = require('./controller/user.controller');
+const likeController = require('./controller/like.controller');
 
 app.use(cors());
 app.use(express.json());
@@ -23,18 +25,18 @@ app.route('/api/posts/:id')
 
 //route for user
 app.route('/api/users')
-    .post(blogController.signUp)
-    .get(blogController.findAllUser);
+    .post(userController.signUp)
+    .get(userController.findAllUser);
 
 app.route('/api/users/:username')
-    .get(blogController.seeDetailUser)
-    .put(blogController.updateUser);
+    .get(userController.seeDetailUser)
+    .put(userController.updateUser);
 
 app.route('/api/users/:username/change-password')
-    .put(blogController.updatePass);
+    .put(userController.updatePass);
 //route for like
 app.route('/api/likes')
-    .put(blogController.changeLikeState);
+    .put(likeController.changeLikeState);
 
 //Link Error 404 and status code 500
 const ApiError = require('./api-error');
