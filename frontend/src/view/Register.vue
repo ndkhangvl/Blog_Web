@@ -82,9 +82,13 @@ export default {
     };
   },
   methods: {
-    async register(user) {
+    async register() {
             try {
-                await blogService.signUp(user);
+                await blogService.signUp({
+                  user_name: this.name,
+                  user_usname: this.username,
+                  user_passwd: this.password,
+                });
                 this.message = 'Tài khoản được thêm thành công.';
             } catch (error) {
                 console.log(error);
