@@ -1,9 +1,9 @@
 <template>
-    <div class="flex lg:max-w-4xl max-w-3xl lg:flex-grow">
+    <div class="flex lg:max-w-4xl max-w-3xl lg:flex-grow mx-auto">
         <div
-            class="lg:bg-white lg:w-1/2 lg:p-8 lg:py-16 lg:px-12 space-y-7 marlene-rounded-l-lg shadow-sm w-max p-8 marlene-bg-glass-ex">
+            class="lg:bg-white lg:w-1/2 lg:p-8 lg:py-16 lg:px-12 space-y-7 marlene-rounded-l-lg shadow-sm w-max p-8 marlene-bg-glass-ex mx-auto">
             <div class="space-y-3.5">
-                <p class="mb-2 text-primary text-4xl">Đăng Nhập</p>
+                <p class="mb-2 text-primary text-4xl text-center">Đăng Nhập</p>
             </div>
             <form>
                 <div class="mb-6">

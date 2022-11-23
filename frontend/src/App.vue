@@ -9,17 +9,20 @@ export default {
 </script>
 
 <template>
-  <AppHeader />
-  <div class="flex items-center justify-center h-full ">
-    <router-view v-slot="{ Component }">
+  <div>
+    <AppHeader />
+  </div>
+<div class="container mx-auto">
+  <router-view />
+</div>
+    <!-- <router-view v-slot="{ Component }">
       <transition name="fade" >
         <keep-alive>
           <component :is="Component"/>
         </keep-alive>
       </transition>
-    </router-view>
+    </router-view> -->
    <!-- <Login/> -->
-  </div>
 </template>
 
 <style scoped lang="postcss">
