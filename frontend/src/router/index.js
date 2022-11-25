@@ -19,6 +19,13 @@ const routes = [
         name: 'Register',
         component: () => import('@/view/Register.vue'),
     },
+
+    {
+        path: '/blogpost',
+        name: 'Blog Post',
+        component: () => import('@/components/StatusForm.vue'),
+    },
+
 ];
 
 const router = createRouter({

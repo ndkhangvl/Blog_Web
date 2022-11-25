@@ -19,6 +19,15 @@ class BlogService {
     async getManyPost() {
         return (await this.api.get(this.baseUrlPost)).data;
     }
+
+    async signIn(user) {
+        return (await this.api.post( `${url}/api/userLogin`, user)).data;
+    }
+
+    async createPost(post) {
+        return (await this.api.post( `${url}/api/posts`, post)).data;
+
+    }
 }
 
 export const blogService = new BlogService();
