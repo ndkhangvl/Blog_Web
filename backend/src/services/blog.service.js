@@ -37,18 +37,18 @@ class BlogService {
             .select('posts.post_id', 'user_name', 'user_usname', 'post_dateUp', 'post_title', 'post_content')
             .join('users', 'users.user_id', 'posts.user_id')
             .leftJoin('likes', 'posts.post_id', 'likes.post_id')
-            .count('likes.post_id', { as: 'numLike' }).groupBy('likes.post_id')
+            .count('likes.post_id', { as: 'numLike' }).groupBy('posts.post_id')
             .where('post_title', 'like', `%${keyword}%`)
             .orderBy('post_dateUp', "desc");
     }
 
     async findByPostId(id) {
         return await this.posts
-            .select('posts.post_id', 'user_name', 'user_usname', 'post_dateUp', 'post_title', 'post_content').first()
+            .select('posts.post_id', 'user_name', 'user_usname', 'post_dateUp', 'post_title', 'post_content')
             .join('users', 'users.user_id', 'posts.user_id')
             .leftJoin('likes', 'posts.post_id', 'likes.post_id')
-            .count('likes.post_id', { as: 'numLike' }).groupBy('likes.post_id')
-            .where('posts.post_id', id);
+            .count('likes.post_id', { as: 'numLike' }).groupBy('posts.post_id')
+            .where('posts.post_id', id).first();
     }
 
     #getContentPost(payload) {

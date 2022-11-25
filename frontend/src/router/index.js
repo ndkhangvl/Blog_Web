@@ -7,7 +7,12 @@ const routes = [
         name: 'Home',
         component: () => import('@/view/PostHome.vue'), 
     },
-
+    {
+        path: '/posts/:id',
+        name: 'post.show',
+        component: () => import('@/view/PostShow.vue'),
+        props: (route) => ({ postId: parseInt(route.params.id) })
+    },
     {
         path:'/login',
         name: 'Login',

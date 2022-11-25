@@ -59,10 +59,13 @@ export default {
     methods: {
         async retrievePosts() {
             try {
+                /*
                 const postsList = await blogService.getManyPost();
                 this.posts = postsList.sort((current, next) =>
                     current.post_title.localeCompare(next.post_title)
                 );
+                */
+               this.posts = await blogService.getManyPost();
             } catch (error) {
                 console.log(error);
             }
