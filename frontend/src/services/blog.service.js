@@ -15,6 +15,10 @@ class BlogService {
     async signUp(user) {
         return (await this.api.post(this.baseUrl, user)).data;
     }
+
+    async signIn(user) {
+        return (await this.api.post( `${url}/api/userLogin`, user)).data;
+    }
 }
 
 export const blogService = new BlogService();
