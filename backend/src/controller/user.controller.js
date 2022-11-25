@@ -38,7 +38,24 @@ exports.signUp = async(req, res, next) => {
         );
     }
 };
-
+exports.signIn = async(req, res, next) => {
+    if(!req.body?.username) {
+        return next(new ApiError(400, 'Username can not be empty'));
+    }
+    if(!req.body?.password) {
+        return next(new ApiError(400, 'Password can not be empty'));
+    }
+    try {
+        const userService = new UserService();
+        const user = await userService.signIn(req.body.username, req.body.password);
+        return res.send(user);        
+    } catch (error) {
+        console.log(error);
+        return next(
+            new ApiError(500, ' An error occured while login the user')
+        );
+    }
+};
 exports.findAllUser = async(req, res, next) => {
     let users = [];
 
@@ -210,38 +227,3 @@ exports.delete = async (req, res, next) => {
         );
     }
 };
-
-//function for like
-exports.changeLikeState = async (req, res, next) => {
-    try {
-        const userService = new UserService();
-        const { userid, postid } = req.query;
-        if (userid && postid) {
-            const isLike = await userService.isLike(postid, userid);
-            if(isLike) {
-                const userService = new UserService();
-                const dislike = await userService.updateDislike(postid, userid);
-                if (!dislike) {
-                    return next(new ApiError(404, 'Post or User not found'));
-                }
-                return res.send({ message: 'Dislike successfully'});
-                
-            } else {
-                const userService = new UserService();
-                const like = await userService.updateLike(postid, userid);
-                if(!like) {
-                    return next(new ApiError(404, 'Post or User not found'));
-                }
-                return res.send({ message: 'Like successfully'});
-            }
-        }
-    } catch(error) {
-        console.log(error);
-        return next(
-            new ApiError(
-                500,
-                `Could not change like state with userid=${req.params.userid} and postid=${req.params.postid}`
-            )
-        );
-    }
-}

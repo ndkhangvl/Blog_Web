@@ -23,6 +23,13 @@ class UserService {
         const [user_id] = await this.users.insert(user);
         return { user_id, ...user };
     }
+    
+    async signIn(username, password) {
+        return await this.users
+            .select('user_usname')
+            .where('user_usname', `${username}`)
+            .andWhere('user_passwd', `${password}`).first();
+    }
 
     async allUser() {
         return await this.users.select('user_id', 'user_name', 'user_usname');

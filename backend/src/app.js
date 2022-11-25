@@ -34,6 +34,10 @@ app.route('/api/users/:username')
 
 app.route('/api/users/:username/change-password')
     .put(userController.updatePass);
+
+app.route('/api/userLogin')
+    .post(userController.signIn);
+    
 //route for like
 app.route('/api/likes')
     .put(likeController.changeLikeState);
