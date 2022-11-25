@@ -4,6 +4,7 @@ const url = import.meta.env.VITE_APP_API_URL;
 class BlogService {
     constructor() {
         this.baseUrl = `${url}/api/users`;
+        this.baseUrlPost = `${url}/api/posts`;
         this.api = axios.create({
             headers: {
                 'Content-Type': 'application/json',
@@ -14,6 +15,9 @@ class BlogService {
 
     async signUp(user) {
         return (await this.api.post(this.baseUrl, user)).data;
+    }
+    async getManyPost() {
+        return (await this.api.get(this.baseUrlPost)).data;
     }
 }
 
