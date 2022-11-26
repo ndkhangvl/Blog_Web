@@ -22,7 +22,7 @@
                 class="tracking-widest bg-primary min-w-full h-12 focus:bg-secondary hover:bg-secondary text-white rounded-lg text-2xl marlene-btn"
                 type="submit">Tạo bài viết</button>
         </div>
-        <p>{{ message }}</p>
+        <!-- <p>{{ message }}</p> -->
     </Form>
 </template>
 <script>

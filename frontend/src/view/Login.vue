@@ -33,6 +33,7 @@
                         type="submit">Đăng Nhập</button>
                 </div>
             </Form>
+            <p> {{ error.message }}</p>
         </div>
     </div>
 </template>
@@ -82,6 +83,7 @@ export default {
 
             } catch (error) {
                 console.log(error);
+                this.message = 'Tài khoản được thêm thành công.';
             }
 
 

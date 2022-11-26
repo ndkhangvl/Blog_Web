@@ -24,10 +24,10 @@ export const useAuthStore = defineStore({
                 console.log("in auth: ", this.userAuth.data.user_id);
                 
 
-                // return Promise.resolve(res.data);
+                return Promise.resolve(this.userAuth.data);
             } catch (error) {
                 console.log(error);
-                // return Promise.reject(error);
+                return Promise.reject(error);
             }
         },
     },
