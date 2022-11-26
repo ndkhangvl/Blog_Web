@@ -1,5 +1,14 @@
 import {createWebHistory, createRouter} from 'vue-router';
+import { useAuthStore } from "@/store/auth";
 //import Home from "@view/Home.vue";
+
+function isAuth() {
+    const authStore = useAuthStore();
+    if (authStore.userAuth == null) {
+      return { name: "Login" };
+    }
+    return true;
+  }
 
 const routes = [
     {
@@ -27,7 +36,7 @@ const routes = [
 
     {
         path: '/blogpost',
-        name: 'Blog Post',
+        name: 'BlogPost',
         component: () => import('@/components/StatusForm.vue'),
     },
 

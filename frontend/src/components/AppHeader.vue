@@ -1,7 +1,7 @@
 <template>
 <nav class="p-3 border-gray-200 rounded bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
   <div class="container flex flex-wrap items-center justify-between mx-auto">
-    <a href="/" class="flex items-center">
+    <a v-on:click="moveToHome" href="#" class="flex items-center">
         <img src="/blogweb.png" class="h-6 mr-3 sm:h-10" alt="Flowbite Logo" />
         <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Blog Site</span>
     </a>
@@ -14,15 +14,23 @@
         <li>
           <a href="#" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-white dark:bg-blue-600 md:dark:bg-transparent" aria-current="page">Home</a>
         </li>
-        <li>
-          <a href="/blogpost" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Create Post</a>
-        </li>
-        <li>
-          <a href="/login" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Đăng Nhập</a>
-        </li>
-        <li>
-          <a href="/register" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Đăng Ký</a>
-        </li>
+        <div v-if="isAuth">
+          <li>
+            <a v-on:click="moveToBlogCreate" href="#" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Thêm Bài Viết</a>
+          </li>
+          <li>
+            <a href="/" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Đăng Xuất</a>
+          </li>
+        </div>
+        <div v-else>
+          <li>
+            <a href="/login" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Đăng Nhập</a>
+          </li>
+          <li>
+            <a href="/register" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Đăng Ký</a>
+          </li>
+        </div>
+        
       </ul>
     </div>
   </div>
@@ -39,3 +47,27 @@
     margin: 0px;
     }
 </style>
+
+<script>
+import { useAuthStore } from '@/store/auth';
+import { mapActions, mapState } from 'pinia';
+export default {
+  methods: {
+    ...mapActions(useAuthStore, { _logout: "logout" }),
+    logout() {
+      this._logout();
+    },
+    moveToBlogCreate(){
+      this.$router.push("/blogpost");
+    },
+    moveToHome() {
+      this.$router.push("/");
+    }
+  },
+  computed: {
+    isAuth() {
+      return useAuthStore().userAuth != null;
+    },
+  },
+}
+</script>

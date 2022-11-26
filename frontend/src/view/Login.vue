@@ -64,20 +64,26 @@ export default {
     },
 
     computed: {
-        ...mapState(useAuthStore, ["user"]),
+        ...mapState(useAuthStore, ["userAuth"]),
     },
-
+    mounted() {
+        console.log("in login 1: ", this.userAuth);
+    },
     methods: {
         ...mapActions(useAuthStore, { loginV: "login"}),
         async login() {
             try {
-                const user = await this.loginV({
+                await this.loginV({
                     username: this.username,
                     password: this.password,
                 });
-                //this.$router.push("/users");
-                console.log("user id: ", user);
-
+                if(this.userAuth != null && this.userAuth != undefined){
+                    this.$router.push("/");
+                    console.log("in login: ", this.userAuth.data.user_id);
+                }else {
+                    
+                }
+                
             } catch (error) {
                 console.log(error);
             }
