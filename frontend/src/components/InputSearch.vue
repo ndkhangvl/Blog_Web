@@ -16,7 +16,9 @@ export default {
 </script>
 
 <template>
+    
     <div class="input-group max-w-3xl">
+        
         <input
             type="text"
             class="form-control"

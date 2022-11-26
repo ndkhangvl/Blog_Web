@@ -48,7 +48,11 @@ exports.signIn = async(req, res, next) => {
     try {
         const userService = new UserService();
         const user = await userService.signIn(req.body.username, req.body.password);
-        return res.send(user);        
+        if(!user) {
+            return next(new ApiError(404, 'User not found'))
+        } else {
+            return res.send(user); 
+        }
     } catch (error) {
         console.log(error);
         return next(

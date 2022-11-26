@@ -33,6 +33,7 @@
                         type="submit">Đăng Nhập</button>
                 </div>
             </Form>
+            <p> {{ error.message }}</p>
         </div>
     </div>
 </template>
@@ -77,15 +78,14 @@ export default {
                     username: this.username,
                     password: this.password,
                 });
-                if(this.userAuth != null && this.userAuth != undefined){
-                    this.$router.push("/");
-                    console.log("in login: ", this.userAuth.data.user_id);
-                }else {
-                    
-                }
-                
+
+                this.$router.push("/");
+                console.log("in login: ", this.userAuth.data.user_id);
+
+
             } catch (error) {
                 console.log(error);
+                this.message = 'Tài khoản được thêm thành công.';
             }
 
 
