@@ -1,11 +1,20 @@
-import {createWebHistory, createRouter} from 'vue-router';
+import { createWebHistory, createRouter } from 'vue-router';
+import { useAuthStore } from "@/store/auth";
 //import Home from "@view/Home.vue";
+
+function isAuth() {
+    const authStore = useAuthStore();
+    if (authStore.userAuth == null) {
+        return { name: "Login" };
+    }
+    return true;
+}
 
 const routes = [
     {
-        path:'/',
+        path: '/',
         name: 'Home',
-        component: () => import('@/view/PostHome.vue'), 
+        component: () => import('@/view/PostHome.vue'),
     },
     {
         path: '/posts/:id',
@@ -14,9 +23,9 @@ const routes = [
         props: (route) => ({ postId: parseInt(route.params.id) })
     },
     {
-        path:'/login',
+        path: '/login',
         name: 'Login',
-        component: () => import('@/view/Login.vue'), 
+        component: () => import('@/view/Login.vue'),
     },
 
     {
@@ -27,7 +36,7 @@ const routes = [
 
     {
         path: '/blogpost',
-        name: 'Blog Post',
+        name: 'BlogPost',
         component: () => import('@/components/StatusForm.vue'),
     },
 

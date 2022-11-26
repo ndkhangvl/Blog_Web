@@ -1,7 +1,15 @@
 <script>
 import AppHeader from '@/components/AppHeader.vue';
+import { useAuthStore } from '@/store/auth';
+import { mapActions, mapState } from 'pinia';
 
 export default {
+  setup() {
+    const store = useAuthStore();
+   return {
+      store,
+    };
+  },
   components: {
     AppHeader,
   },

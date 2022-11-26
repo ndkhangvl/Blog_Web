@@ -8,7 +8,8 @@ class BlogService {
     #getPost(payload) {
         const post = { ...payload };
         const postProperties = [
-            "user_id", "post_title", "post_content"
+            // "user_id", "post_title", "post_content"
+            "post_title", "post_content"
         ];
         //Remove non-user properties
         Object.keys(post).forEach(function (key) {
