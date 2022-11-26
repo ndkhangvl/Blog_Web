@@ -1,57 +1,52 @@
 <template>
-    
-        <div class="flex justify-center">
+    <div class="flex justify-center">
+        <InputSearch v-model="searchText" />
+    </div>
+    <div class="flex justify-center">
+        <PostList v-if="filteredPostsCount > 0" :posts="filteredPosts" />
+        <p v-else>
+            Không có bài viết nào
+        </p>
+    </div>
 
-            <PostList v-if="filteredPostsCount > 0" :posts="filteredPosts" v-model:activeIndex="activeIndex" />
-            <p v-else>
-                
-            </p>
-
-        </div>
-    
 </template>
 
 <script>
+import InputSearch from '@/components/InputSearch.vue';
 import PostList from "@/components/PostList.vue";
 import { blogService } from '@/services/blog.service';
 export default {
     components: {
+        InputSearch,
         PostList,
     },
     //The full code will be presented below
     data() {
         return {
             posts: [],
-            activeIndex: -1,
             searchText: '',
         };
     },
     watch: {
         // Monitor changes on searchText
         // Release the currently selected post
-        searchText() {
-            this.activeIndex = -1;
-        },
     },
     computed: {
         // Map posts to strings for searching.
         postsAsStrings() {
             return this.posts.map((post) => {
-                const { user_usname, post_title, post_content } = post;
-                return [user_usname, post_title, post_content].join('');
+                const { post_title } = post;
+                return [ this.removeVietnameseTones(post_title.toLowerCase())].join('');
             });
         },
         // Return posts filtered by the search box.
         filteredPosts() {
             if (!this.searchText) return this.posts;
             return this.posts.filter((post, index) =>
-                this.postsAsStrings[index].includes(this.searchText)
+                this.postsAsStrings[index].includes(this.removeVietnameseTones(this.searchText.toLowerCase()))
             );
         },
-        activePost() {
-            if (this.activeIndex < 0) return null;
-            return this.filteredPosts[this.activeIndex];
-        },
+    
         filteredPostsCount() {
             return this.filteredPosts.length;
         },
@@ -65,14 +60,41 @@ export default {
                     current.post_title.localeCompare(next.post_title)
                 );
                 */
-               this.posts = await blogService.getManyPost();
+                this.posts = await blogService.getManyPost();
             } catch (error) {
                 console.log(error);
             }
         },
         refreshList() {
             this.retrievePosts();
-            this.activeIndex = -1;
+        },
+        removeVietnameseTones(str) {
+            str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+            str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+            str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+            str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+            str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+            str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+            str = str.replace(/đ/g, "d");
+            /*str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
+            str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
+            str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
+            str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
+            str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
+            str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
+            str = str.replace(/Đ/g, "D");*/
+            // Some system encode vietnamese combining accent as individual utf-8 characters
+            // Một vài bộ encode coi các dấu mũ, dấu chữ như một kí tự riêng biệt nên thêm hai dòng này
+            str = str.replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, ""); // ̀ ́ ̃ ̉ ̣  huyền, sắc, ngã, hỏi, nặng
+            str = str.replace(/\u02C6|\u0306|\u031B/g, ""); // ˆ ̆ ̛  Â, Ê, Ă, Ơ, Ư
+            // Remove extra spaces
+            // Bỏ các khoảng trắng liền nhau
+            str = str.replace(/ + /g, " ");
+            str = str.trim();
+            // Remove punctuations
+            // Bỏ dấu câu, kí tự đặc biệt
+            str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g, " ");
+            return str;
         },
     },
     mounted() {
@@ -82,8 +104,5 @@ export default {
 </script>
 
 <style scoped>
-.page {
-    text-align: left;
-    max-width: 750px;
-}
+
 </style>

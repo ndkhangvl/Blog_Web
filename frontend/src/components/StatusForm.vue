@@ -22,15 +22,13 @@
                 class="tracking-widest bg-primary min-w-full h-12 focus:bg-secondary hover:bg-secondary text-white rounded-lg text-2xl marlene-btn"
                 type="submit">Tạo bài viết</button>
         </div>
-        <p>{{ message }}</p>
+        <!-- <p>{{ message }}</p> -->
     </Form>
 </template>
 <script>
 import * as yup from 'yup';
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import { blogService } from '@/services/blog.service';
-import { mapActions, mapState } from "pinia";
-import { useAuthStore } from '@/store/auth';
 export default {
     computed: {
         ...mapState(useAuthStore, ["userAuth"]),
@@ -59,7 +57,7 @@ export default {
                 .max(50, "Tên không thể quá 50 kí tự"),
         });
         return {
-            //iduser: "",
+            // iduser: "",
             title: "",
             post: "",
             error: "",
@@ -71,21 +69,16 @@ export default {
         async createpost() {
             try {
                 await blogService.createPost({
-                    user_id: this.userAuth.data.user_id,
-                    post_title: this.title,
-                    post_content: this.post,
+                    // iduser_post: this.iduser,
+                    title_name: this.title,
+                    post_blog: this.post,
                 });
                 this.message = 'Thêm bài viết thành công.';
             } catch (error) {
                 console.log(error);
-                //console.log("user id: ", user);
             }
-            // let res = await axios.post(`/api/users/${this.user.id}/uploads/image`)
-
         },
     },
-
-
 
     components: { Form, Field, ErrorMessage }
 

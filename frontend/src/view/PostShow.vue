@@ -1,10 +1,10 @@
 <template>
 
     <div v-if="post" class="flex justify-center">
-        <PostForm 
-            :post="post"
-        />
+        <PostForm :post="post" />
+
     </div>
+
 
 </template>
 
@@ -24,13 +24,13 @@ export default {
             post: null,
         };
     },
-    
+
     methods: {
         async getPost(id) {
-            try{
+            try {
                 this.post = await blogService.getPost(id);
                 console.log(this.post);
-            }catch (error) {
+            } catch (error) {
                 console.log(error);
                 this.$router.push({
                     name: 'notfound',
@@ -50,8 +50,5 @@ export default {
 </script>
 
 <style scoped>
-.page {
-    text-align: left;
-    max-width: 750px;
-}
+
 </style>

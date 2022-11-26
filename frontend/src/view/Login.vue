@@ -41,8 +41,6 @@
 import * as yup from 'yup';
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import { blogService } from '@/services/blog.service';
-import { useAuthStore } from '@/store/auth';
-import { mapActions, mapState } from 'pinia';
 export default {
     data() {
         const formSchema = yup.object().shape({
@@ -62,23 +60,16 @@ export default {
             formSchema
         })
     },
-
-    computed: {
-        ...mapState(useAuthStore, ["userAuth"]),
-    },
-    mounted() {
-        console.log("in login 1: ", this.userAuth);
-    },
     methods: {
-        ...mapActions(useAuthStore, { loginV: "login"}),
+
         async login() {
             try {
-                await this.loginV({
+                const user = await blogService.signIn({
                     username: this.username,
                     password: this.password,
                 });
-                this.$router.push("/");
-                console.log("in login: ", this.userAuth.data.user_id);
+
+                console.log("user", user);
 
             } catch (error) {
                 console.log(error);
