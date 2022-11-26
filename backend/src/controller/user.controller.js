@@ -48,11 +48,11 @@ exports.signIn = async(req, res, next) => {
     try {
         const userService = new UserService();
         const user = await userService.signIn(req.body.username, req.body.password);
-        if(!user) {
-            return next(new ApiError(404, 'User not found'))
-        } else {
+        // if(!user) {
+        //     return next(new ApiError(404, 'User not found'))
+        // } else {
             return res.send(user); 
-        }
+        // }
     } catch (error) {
         console.log(error);
         return next(
@@ -137,97 +137,97 @@ exports.updatePass = async (req, res, next) => {
         );
     }
 };
-//functions for post
-exports.create = async (req, res, next) =>{
-    if(!req.body?.post_title) {
-        return next(new ApiError(400, 'Title post can not be empty'));
-    }
-    try {
-        const userService = new UserService();
-        const post = await userService.createPost(req.body);
-        return res.send(post);        
-    } catch (error) {
-        console.log(error);
-        return next(
-            new ApiError(500, ' An error occured while creating the post')
-        );
-    }
-};
+// //functions for post
+// exports.create = async (req, res, next) =>{
+//     if(!req.body?.post_title) {
+//         return next(new ApiError(400, 'Title post can not be empty'));
+//     }
+//     try {
+//         const userService = new UserService();
+//         const post = await userService.createPost(req.body);
+//         return res.send(post);        
+//     } catch (error) {
+//         console.log(error);
+//         return next(
+//             new ApiError(500, ' An error occured while creating the post')
+//         );
+//     }
+// };
 
-exports.findAll = async(req, res, next) => {
-    let posts = [];
+// exports.findAll = async(req, res, next) => {
+//     let posts = [];
 
-    try{
-        const userService = new UserService();
-        const { keyword } = req.query;
-        if (keyword) {
-            posts = await userService.findByTitle(keyword);
-        } else {
-            posts = await userService.allPost();
-        }
-    } catch (error) {
-        console.log(error);
-        return next(
-            new ApiError(500, 'An error occured while retrieving posts')
-        );
-    }
+//     try{
+//         const userService = new UserService();
+//         const { keyword } = req.query;
+//         if (keyword) {
+//             posts = await userService.findByTitle(keyword);
+//         } else {
+//             posts = await userService.allPost();
+//         }
+//     } catch (error) {
+//         console.log(error);
+//         return next(
+//             new ApiError(500, 'An error occured while retrieving posts')
+//         );
+//     }
 
-    return res.send(posts);
-};
+//     return res.send(posts);
+// };
 
-exports.findOne = async(req, res, next) => {
-    try {
-        const userService = new UserService();
-        const post = await userService.findByPostId(req.params.id);
-        if(!post) {
-            return next(new ApiError(404, 'Post not found'));
-        }
-        return res.send(post);
-    } catch (error) {
-        console.log(error);
-        return next(
-            new ApiError(
-                500,
-                `Error retrieving user with id=${req.params.id}`
-            )
-        );
-    }
-};
+// exports.findOne = async(req, res, next) => {
+//     try {
+//         const userService = new UserService();
+//         const post = await userService.findByPostId(req.params.id);
+//         if(!post) {
+//             return next(new ApiError(404, 'Post not found'));
+//         }
+//         return res.send(post);
+//     } catch (error) {
+//         console.log(error);
+//         return next(
+//             new ApiError(
+//                 500,
+//                 `Error retrieving user with id=${req.params.id}`
+//             )
+//         );
+//     }
+// };
 
-exports.update = async (req, res, next) => {
-    if(Object.keys(req.body).length === 0) {
-        return next(new ApiError(400, 'Data to update can not be empty'));
-    }
-    try {
-        const userService = new UserService();
-        const updated = await userService.update(req.params.id, req.body);
-        if (!updated) {
-            return next(new ApiError(404, 'Post not found'));
-        }
-        return  res.send({ message: 'Post was updated successfully' });
-    } catch (error) {
-        console.log(error);
-        return next(
-            new ApiError(500, `Error updating post with id=${req.params.id}`)
-        );
-    }
-};
+// exports.update = async (req, res, next) => {
+//     if(Object.keys(req.body).length === 0) {
+//         return next(new ApiError(400, 'Data to update can not be empty'));
+//     }
+//     try {
+//         const userService = new UserService();
+//         const updated = await userService.update(req.params.id, req.body);
+//         if (!updated) {
+//             return next(new ApiError(404, 'Post not found'));
+//         }
+//         return  res.send({ message: 'Post was updated successfully' });
+//     } catch (error) {
+//         console.log(error);
+//         return next(
+//             new ApiError(500, `Error updating post with id=${req.params.id}`)
+//         );
+//     }
+// };
 
-exports.delete = async (req, res, next) => {
-    try {
-        const userService = new UserService();
-        const deleted = await userService.delete(req.params.id);
-        if (!deleted) {
-            return next(new ApiError(404, 'Post not found'));
-        }
-        return res.send({ message: 'Post was deleted successfully'});
-    } catch (error) {
-        console.log(error);
-        return next(
-            new ApiError(
-                500,
-                `Could not delete post with id=${req.params.id}`
-            )
-        );
-    }
-};
+// exports.delete = async (req, res, next) => {
+//     try {
+//         const userService = new UserService();
+//         const deleted = await userService.delete(req.params.id);
+//         if (!deleted) {
+//             return next(new ApiError(404, 'Post not found'));
+//         }
+//         return res.send({ message: 'Post was deleted successfully'});
+//     } catch (error) {
+//         console.log(error);
+//         return next(
+//             new ApiError(
+//                 500,
+//                 `Could not delete post with id=${req.params.id}`
+//             )
+//         );
+//     }
+// };

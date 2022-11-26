@@ -78,14 +78,16 @@ export default {
                     username: this.username,
                     password: this.password,
                 });
-
-                this.$router.push("/");
-                console.log("in login: ", this.userAuth.data.user_id);
+                if(this.userAuth != null){
+                    this.$router.push("/");
+                }
+                
+                console.log("in login: ", this.userAuth);
 
 
             } catch (error) {
                 console.log(error);
-                this.message = 'Tài khoản được thêm thành công.';
+               // this.message = 'Tài khoản được thêm thành công.';
             }
 
 
