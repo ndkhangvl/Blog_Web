@@ -26,7 +26,7 @@ class UserService {
     
     async signIn(username, password) {
         return await this.users
-            .select('user_usname')
+            .select('user_id')
             .where('user_usname', `${username}`)
             .andWhere('user_passwd', `${password}`).first();
     }
