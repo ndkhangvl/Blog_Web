@@ -26,3 +26,6 @@ content-type: application/json
     "post_title": "ndkhangvl",
     "post_content": "fdfdsfnmnmnsdfd"
 }
+
+###
+GET http://localhost:3000/api/likes?userid=1&postid=57

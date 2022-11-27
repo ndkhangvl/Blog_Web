@@ -40,7 +40,8 @@ app.route('/api/userLogin')
     
 //route for like
 app.route('/api/likes')
-    .put(likeController.changeLikeState);
+    .put(likeController.changeLikeState)
+    .get(likeController.checkLike);
 
 //Link Error 404 and status code 500
 const ApiError = require('./api-error');

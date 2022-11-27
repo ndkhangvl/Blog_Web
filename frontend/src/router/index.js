@@ -22,6 +22,11 @@ const routes = [
         component: () => import('@/view/PostHome.vue'), 
     },
     {
+        path:'/users',
+        name: 'UserHome',
+        component: () => import('@/view/UserHome.vue'), 
+    },
+    {
         path: '/posts/:id',
         name: 'post.show',
         component: () => import('@/view/PostShow.vue'),

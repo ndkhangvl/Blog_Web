@@ -55,8 +55,8 @@ export default {
             post: yup
                 .string()
                 .required('Tên không thể bỏ trống.')
-                .min(2, "Tên không thể ít hơn 2 kí tự")
-                .max(50, "Tên không thể quá 50 kí tự"),
+                .min(2, "Tên không thể ít hơn 2 kí tự"),
+                //.max(50, "Tên không thể quá 50 kí tự"),
         });
         return {
             //iduser: "",

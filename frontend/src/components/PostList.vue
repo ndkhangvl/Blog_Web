@@ -1,4 +1,7 @@
 <script>
+import { useAuthStore } from '@/store/auth';
+import { blogService } from '@/services/blog.service';
+import { Document } from 'postcss';
 export default {
     props: {
         posts: { type: Array, default: () => [] },
@@ -9,13 +12,54 @@ export default {
         updateActiveIndex(index) {
             this.$emit('update:activeIndex', index);
         },
+        async likeCheck(postid) {
+            //document.getElementById(`like`+postid).innerHTML = "Hi";
+            var mes = `messageLike`+postid;
+            this.mes = "Hi";
+            try{
+               var islike = await blogService.checkLike(useAuthStore().userAuth.data.user_id, postid);
+               if(islike != ""){
+                console.log("likebutton: ", islike);
+                //this.messageLike = "Hủy thích";
+                console.log("Huy thich");
+               }else {
+                //this.messageLike = "Thích";
+                console.log("Thich");
+            };
+                
+               
+            }catch (error) {
+                console.log(error);
+            }
+        },
+        async likeAction(postid) {
+            try{
+                await blogService.actionLike(useAuthStore().userAuth.data.user_id, postid);
+                console.log("Change like state successful");
+                this.likeCheck(postid);
+            }catch (error) {
+                console.log(error);
+            }
+        },
+        concatMes(string1, string2) {
+            console.log("newstring: ", string1 + string2);
+            return string1 + string2;
+        }
+    },
+    computed: {
+        isAuth() {
+            return useAuthStore().userAuth != null;
+        },
+        // isLike(postid) {
+        //     return this.likeCheck(postid) != null;
+        // }
     },
 };
 </script>
 
 <template>
     <ul class="list-group">
-        <li v-for="(post, index) in posts" :key="post.id" :class="{ active: index === activeIndex }">
+        <li v-for="(post, index) in posts" :key="post.post_id" :class="{ active: index === activeIndex }">
             <div class="rounded-lg shadow-lg bg-white max-w-3xl my-2 object">
                 <div class="p-7">
                     <div class="text-gray-900 text-base font-medium mb-2">
@@ -32,6 +76,7 @@ export default {
                     <p class="text-gray-700 text-base mb-4 line-clamp-4">
                         {{ post.post_content }}
                     </p>
+                    
                     <router-link :to="{
                         name: 'post.show',
                         params: { id: post.post_id },
@@ -47,11 +92,11 @@ export default {
                             </svg>
                         </div>
                     </router-link>
-                    <!--
-                    <p class="text-gray-700 text-base mb-4 font-medium">
-                        Likes: {{ post.numLike }}
-                    </p>
-                    -->
+                </div>
+                <div class="flex justify-end">
+                    <div v-if="isAuth" v-on:click="likeAction(post.post_id)" class="mx-7 mb-4 btn btn-outline-secondary text-white bg-blue-700">
+                        <div v-bind:on-change="likeCheck(post.post_id)"> Thích </div>
+                    </div>
                 </div>
             </div>
         </li>

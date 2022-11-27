@@ -6,6 +6,12 @@
         <img src="/blogweb.png" class="h-6 mr-3 sm:h-10" alt="Flowbite Logo" />
         <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Blog Site</span>
       </a>
+      <a v-on:click="moveToPostList" class="">
+        <span class="btn btn-outline-secondary text-white bg-blue-700">Bài viết</span>
+      </a>
+      <a v-on:click="moveToUserList" class="">
+        <span class="btn btn-outline-secondary text-white bg-blue-700">Người dùng</span>
+      </a>
       <div v-if="isAuth" class="hidden w-full md:block md:w-auto" id="navbar-solid-bg">
         <ul
           class="flex flex-col mt-4 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
@@ -66,6 +72,12 @@ export default {
     },
     moveToHome() {
       this.$router.push("/");
+    },
+    moveToPostList() {
+      this.$router.push("/posts");
+    },
+    moveToUserList() {
+      this.$router.push("/users");
     }
   },
   computed: {

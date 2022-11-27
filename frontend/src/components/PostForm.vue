@@ -29,7 +29,11 @@ export default {
                 //second: 'numeric'
             });
             return date;
-        }
+        },
+        
+    },
+    computed: {
+        
     }
 };
 </script>
@@ -62,7 +66,7 @@ export default {
                 {{ post.numLike }}
             </p>
         </div>
-
+        
     </div>
 </template>
 <style>

@@ -11,7 +11,9 @@ class LikeService {
         }else
         return;
     }
-
+    async checkLike(postid, userid) {
+        return await this.likes.select('post_id').where('user_id', userid).andWhere('post_id', postid);
+    }
     async updateLike(postid, userid) {
         const insertData = {
             user_id: userid,

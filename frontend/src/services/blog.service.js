@@ -31,6 +31,17 @@ class BlogService {
         return (await this.api.post( `${url}/api/posts`, post)).data;
 
     }
+
+    async getAllUser() {
+        return (await this.api.get(this.baseUrl)).data;
+    }
+
+    async checkLike(userid, postid) {
+        return (await this.api.get(`${url}/api/likes?userid=${userid}&postid=${postid}`)).data;
+    }
+    async actionLike(userid, postid) {
+        return (await this.api.put(`${url}/api/likes?userid=${userid}&postid=${postid}`)).data;
+    }
 }
 
 export const blogService = new BlogService();
