@@ -1,12 +1,22 @@
 <script>
 import * as yup from 'yup';
 import { Form, Field, ErrorMessage } from 'vee-validate';
+import { useAuthStore } from '@/store/auth';
+import { blogService } from '@/services/blog.service';
+import { mapState } from 'pinia';
 export default {
     components: {
         Form,
         Field,
         ErrorMessage,
     },
+
+    mounted() {
+        console.log(this.userAuth);
+        console.log(this.post.user_usname);
+        console.log(this.userAuth.data.user_usname);
+    },
+
     props: {
         post: { type: Object, required: true }
     },
@@ -30,10 +40,36 @@ export default {
             });
             return date;
         },
-        
+
+        checkUser() {
+            try {
+                if(this.userAuth.data.user_usname == this.post.user_usname ) {
+                    return true;
+                } else {
+                    return;
+                }
+            } catch (error) {
+
+            }
+        },
+
+        async clearPost(postid) {
+            try {
+                await blogService.deletePost(postid);
+                this.$toast.success('Xóa bài viết thành công');
+                this.$router.push('/')
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
     },
     computed: {
-        
+        isAuth() {
+            return useAuthStore().userAuth != null;
+        },
+
+        ...mapState(useAuthStore, ["userAuth"]),
     }
 };
 </script>
@@ -66,7 +102,9 @@ export default {
                 {{ post.numLike }}
             </p>
         </div>
-        
+        <button v-if="isAuth && checkUser()" v-on:click="clearPost(post.post_id)"
+            class="tracking-widest bg-primary min-w-full h-12 focus:bg-secondary hover:bg-secondary text-white rounded-lg text-2xl marlene-btn"
+            type="submit">Xóa bài viết</button>
     </div>
 </template>
 <style>

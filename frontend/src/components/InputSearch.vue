@@ -22,7 +22,7 @@ export default {
 </script>
 
 <template>
-    <div class="flex items-stretch w-full max-w-3xl">
+    <div class="flex items-stretch w-full max-w-3xl p-2">
         <!-- <div class="input-group-append">
             <div class="flex items-center">
                 <input v-on:click="moveToPostList" id="country-option-1" type="radio" name="countries" value="Post"
@@ -42,14 +42,14 @@ export default {
             </div>
         </div> -->
         <input type="text"
-            class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded"
+            class="block appearance-none w-full p-3 py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded"
             placeholder="Nhập từ khóa cần tìm" :value="modelValue" @input="updateModelValue" @keyup.enter="submit">
-        <div class="input-group-append">
+        <!-- <div class="input-group-append">
             <button
                 class="inline-block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                 type="button" @click="submit">
                 <i class="fas fa-search" />Tìm kiếm
             </button>
-        </div>
+        </div> -->
     </div>
 </template>
