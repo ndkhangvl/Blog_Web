@@ -49,6 +49,9 @@ class BlogService {
     async actionLike(userid, postid) {
         return (await this.api.put(`${url}/api/likes?userid=${userid}&postid=${postid}`)).data;
     }
+    async deletePost(postid) {
+        return (await this.api.delete(`${url}/api/posts/${postid}`)).data;
+    }
 }
 
 export const blogService = new BlogService();
