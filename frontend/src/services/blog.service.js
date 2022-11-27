@@ -32,8 +32,15 @@ class BlogService {
 
     }
 
+    async getPostBy(usname) {
+        return (await this.api.get(`${url}/api/users/${usname}/get-post`)).data;
+    }
     async getAllUser() {
         return (await this.api.get(this.baseUrl)).data;
+    }
+
+    async getUserBy(username) {
+        return (await this.api.get(`${this.baseUrl}/${username}`)).data;
     }
 
     async checkLike(userid, postid) {

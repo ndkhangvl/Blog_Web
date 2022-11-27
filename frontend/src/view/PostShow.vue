@@ -1,7 +1,7 @@
 <template>
 
     <div v-if="post" class="flex justify-center">
-        <PostForm :post="post" :messageLike="messageLike"/>
+        <PostForm :post="post"/>
 
     </div>
 
@@ -22,7 +22,6 @@ export default {
     data() {
         return {
             post: null,
-            messageLike: "Huy",
         };
     },
 
@@ -41,35 +40,6 @@ export default {
                     query: this.$route.query,
                     hash: this.$route.hash,
                 });
-            }
-        },
-        async likeCheck(postid) {
-            //document.getElementById(`like`+postid).innerHTML = "Hi";
-            var mes = postid;
-            this.pos = "Hi";
-            try{
-               var islike = await blogService.checkLike(useAuthStore().userAuth.data.user_id, postid);
-               if(islike != ""){
-                console.log("likebutton: ", islike);
-                //this.messageLike = "Hủy thích";
-                console.log("Huy thich");
-               }else {
-                //this.messageLike = "Thích";
-                console.log("Thich");
-            };
-                
-               
-            }catch (error) {
-                console.log(error);
-            }
-        },
-        async likeAction(postid) {
-            try{
-                await blogService.actionLike(useAuthStore().userAuth.data.user_id, postid);
-                console.log("Change like state successful");
-                this.likeCheck(postid);
-            }catch (error) {
-                console.log(error);
             }
         },
     },

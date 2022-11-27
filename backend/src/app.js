@@ -32,6 +32,9 @@ app.route('/api/users/:username')
     .get(userController.seeDetailUser)
     .put(userController.updateUser);
 
+app.route('/api/users/:username/get-post')
+    .get(blogController.getPostBy);
+
 app.route('/api/users/:username/change-password')
     .put(userController.updatePass);
 

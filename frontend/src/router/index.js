@@ -27,6 +27,12 @@ const routes = [
         component: () => import('@/view/UserHome.vue'), 
     },
     {
+        path:'/users/:username',
+        name: 'UserPage',
+        component: () => import('@/view/UserPage.vue'), 
+        props: (route) => ({ username: route.params.username })
+    },
+    {
         path: '/posts/:id',
         name: 'post.show',
         component: () => import('@/view/PostShow.vue'),

@@ -14,6 +14,9 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
     return res.send({message: 'delete blog handler'});
 };
+exports.getPostBy = (req, res) => {
+    return res.send({message: 'get post by user handler'});
+};
 
 const BlogService = require('../services/blog.service');
 const ApiError = require('../api-error');
@@ -108,6 +111,25 @@ exports.delete = async (req, res, next) => {
             new ApiError(
                 500,
                 `Could not delete post with id=${req.params.id}`
+            )
+        );
+    }
+};
+
+exports.getPostBy = async(req, res, next) => {
+    try {
+        const blogService = new BlogService();
+        const post = await blogService.getPostByUser(req.params.username);
+        if(!post) {
+            return next(new ApiError(404, 'Post not found'));
+        }
+        return res.send(post);
+    } catch (error) {
+        console.log(error);
+        return next(
+            new ApiError(
+                500,
+                `Error retrieving post with uid=${req.params.username}`
             )
         );
     }

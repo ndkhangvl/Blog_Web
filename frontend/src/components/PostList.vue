@@ -14,30 +14,30 @@ export default {
         },
         async likeCheck(postid) {
             //document.getElementById(`like`+postid).innerHTML = "Hi";
-            var mes = `messageLike`+postid;
-            this.mes = "Hi";
-            try{
-               var islike = await blogService.checkLike(useAuthStore().userAuth.data.user_id, postid);
-               if(islike != ""){
-                console.log("likebutton: ", islike);
-                //this.messageLike = "Hủy thích";
-                console.log("Huy thich");
-               }else {
-                //this.messageLike = "Thích";
-                console.log("Thich");
-            };
-                
-               
-            }catch (error) {
+            this.messageLike = "";
+            ;
+            try {
+                var islike = await blogService.checkLike(useAuthStore().userAuth.data.user_id, postid);
+                if (islike != "") {
+                    console.log("likebutton: ", islike);
+                    this.messageLike = "Hủy thích";
+                    console.log("Huy thich");
+                } else {
+                    this.messageLike = "Thích";
+                    console.log("Thich");
+                };
+
+
+            } catch (error) {
                 console.log(error);
             }
         },
         async likeAction(postid) {
-            try{
+            try {
                 await blogService.actionLike(useAuthStore().userAuth.data.user_id, postid);
                 console.log("Change like state successful");
                 this.likeCheck(postid);
-            }catch (error) {
+            } catch (error) {
                 console.log(error);
             }
         },
@@ -65,9 +65,14 @@ export default {
                     <div class="text-gray-900 text-base font-medium mb-2">
                         {{ post.user_name }}
                     </div>
-                    <div class="text-gray-700 text-sm mb-4">
-                        @{{ post.user_usname }}
-                    </div>
+                    <router-link :to="{
+                        name: 'UserPage',
+                        params: { username: post.user_usname },
+                    }">
+                        <div class="text-gray-700 text-sm mb-4">
+                            @{{ post.user_usname }}
+                        </div>
+                    </router-link>
                     <div class="flex justify-center">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             {{ post.post_title }}
@@ -76,7 +81,7 @@ export default {
                     <p class="text-gray-700 text-base mb-4 line-clamp-4">
                         {{ post.post_content }}
                     </p>
-                    
+
                     <router-link :to="{
                         name: 'post.show',
                         params: { id: post.post_id },
@@ -94,7 +99,8 @@ export default {
                     </router-link>
                 </div>
                 <div class="flex justify-end">
-                    <div v-if="isAuth" v-on:click="likeAction(post.post_id)" class="mx-7 mb-4 btn btn-outline-secondary text-white bg-blue-700">
+                    <div v-if="isAuth" v-on:click="likeAction(post.post_id)"
+                        class="mx-7 mb-4 btn btn-outline-secondary text-white bg-blue-700">
                         <div v-bind:on-change="likeCheck(post.post_id)"> Thích </div>
                     </div>
                 </div>
