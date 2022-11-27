@@ -14,7 +14,7 @@ export default {
     mounted() {
         console.log(this.userAuth);
         console.log(this.post.user_usname);
-        console.log(this.userAuth.data.user_usname);
+        //console.log(this.userAuth.data.user_usname);
     },
 
     props: {
@@ -43,7 +43,7 @@ export default {
 
         checkUser() {
             try {
-                if(this.userAuth.data.user_usname == this.post.user_usname ) {
+                if (this.userAuth.data.user_usname == this.post.user_usname) {
                     return true;
                 } else {
                     return;
@@ -81,9 +81,14 @@ export default {
             <div class="text-gray-900 text-base font-medium mb-2">
                 {{ post.user_name }}
             </div>
-            <div class="text-gray-700 text-sm mb-4">
-                @{{ post.user_usname }}
-            </div>
+            <router-link :to="{
+                name: 'UserPage',
+                params: { username: post.user_usname },
+            }">
+                <div class="text-gray-700 text-sm mb-4">
+                    @{{ post.user_usname }}
+                </div>
+            </router-link>
 
             <div class="flex justify-center">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
