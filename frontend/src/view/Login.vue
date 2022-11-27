@@ -33,7 +33,7 @@
                         type="submit">Đăng Nhập</button>
                 </div>
             </Form>
-            <p> {{ error.message }}</p>
+            <!-- <p> {{ error.message }}</p> -->
         </div>
     </div>
 </template>
@@ -80,13 +80,16 @@ export default {
                 });
                 if(this.userAuth != null){
                     this.$router.push("/");
+                    this.$toast.success('Đăng nhập thành công');
+                } else {
+                    this.$toast.error('Tài khoản hoặc mật khẩu không đúng');
                 }
-                
                 console.log("in login: ", this.userAuth);
 
 
             } catch (error) {
                 console.log(error);
+                this.$toast.error('Đã xảy ra lỗi');
                // this.message = 'Tài khoản được thêm thành công.';
             }
 

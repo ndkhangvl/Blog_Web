@@ -44,7 +44,7 @@
           class="tracking-widest bg-primary min-w-full h-12 focus:bg-secondary hover:bg-secondary text-white rounded-lg text-2xl marlene-btn"
           type="submit">Đăng Ký</button>
       </div>
-      <p>{{ message }}</p>
+      <!-- <p>{{ message }}</p> -->
     </Form>
     <!-- <div v-if="error" class="text-red-600"> {{ error.message }}</div> -->
   </div>
@@ -62,6 +62,7 @@ export default {
         .string()
         .required('Tên tài khoản không thể bỏ trống.')
         .min(2, "Tên không thể ít hơn 2 kí tự")
+        .matches(/^(\S+$)/g, 'Tên đăng nhập không bao gồm phím cách')
         .max(50, "Tên không thể quá 50 kí tự"),
       name: yup
         .string()
@@ -93,7 +94,9 @@ export default {
                   user_usname: this.username,
                   user_passwd: this.password,
                 });
+                this.$toast.success('Đăng kí tài khoản thành công');
                 this.message = 'Tài khoản được thêm thành công.';
+                this.$router.push('/login');
             } catch (error) {
                 console.log(error);
             }
