@@ -40,6 +40,14 @@ const routes = [
         props: (route) => ({ postId: parseInt(route.params.id) })
     },
     {
+        path: '/posts/editpost/:id',
+        name: 'post.edit',
+        //component: () => import('@/view/PostShow.vue'),
+        component: () => import('@/view/EditPost.vue'),
+        props: (route) => ({ postId: parseInt(route.params.id) })
+    },
+
+    {
         path:'/login',
         name: 'Login',
         component: () => import('@/view/Login.vue'), 

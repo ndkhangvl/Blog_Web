@@ -32,6 +32,11 @@ class BlogService {
 
     }
 
+    async updatePost(postid, post) {
+        return (await this.api.put( `${url}/api/posts/${postid}`, post)).data;
+
+    }
+
     async getPostBy(usname) {
         return (await this.api.get(`${url}/api/users/${usname}/get-post`)).data;
     }

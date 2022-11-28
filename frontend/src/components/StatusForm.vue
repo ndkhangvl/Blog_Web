@@ -1,5 +1,4 @@
 <template>
-
     <div v-if="isAuth">
         <div class="grid grid-cols-2 mx-auto">
             <div>

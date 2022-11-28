@@ -97,6 +97,14 @@ export default {
             }
         },
 
+        async updatePost() {
+            try {
+                this.$router.push('/editpost')
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
         async clearPost(postid) {
             try {
                 await blogService.deletePost(postid);
@@ -167,9 +175,23 @@ export default {
                     <div> {{ messageLike }} </div>
                 </div>
             </div>
-            <button v-if="isAuth && checkUser()" v-on:click="clearPost(post.post_id)"
-                class="tracking-widest bg-primary min-w-full h-12 focus:bg-secondary hover:bg-secondary text-white rounded-lg text-2xl marlene-btn"
-                type="submit">Xóa bài viết</button>
+            <div class="grid gap-4 grid-cols-2 mx-auto p-2">
+                <div class="mx-auto">
+                    <router-link :to="{
+                        name: 'post.edit',
+                        params: { id: post.post_id },
+                    }">
+                        <button v-if="isAuth && checkUser()"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded"
+                            type="submit">Sửa bài viết</button>
+                    </router-link>
+                </div>
+                <div class="mx-auto">
+                    <button v-if="isAuth && checkUser()" v-on:click="clearPost(post.post_id)"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Xóa
+                        bài viết</button>
+                </div>
+            </div>
         </div>
     </div>
 

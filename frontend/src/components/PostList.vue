@@ -73,7 +73,7 @@ export default {
                             @{{ post.user_usname }}
                         </div>
                     </router-link>
-                    <div class="flex justify-center">
+                    <div class="flex justify-center line-clamp-1">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             {{ post.post_title }}
                         </h5>
