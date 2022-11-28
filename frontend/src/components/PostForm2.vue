@@ -14,9 +14,11 @@ export default {
         this.getPost(this.postId);
     },
     mounted() {
-        // console.log(this.userAuth.data.user_id);
-        // console.log(this.post.user_usname);
-        //console.log(this.userAuth.data.user_usname);
+        if (this.isAuth) {
+            console.log(this.userAuth.data.user_id);
+            console.log(this.post.user_usname);
+            console.log(this.userAuth.data.user_usname);
+        }
     },
 
     props: {

@@ -36,7 +36,10 @@ class UserService {
     }
 
     async allUser() {
-        return await this.users.select('user_id', 'user_name', 'user_usname');
+        return await this.users
+        .select('users.user_id', 'user_name', 'user_usname')
+        .leftJoin('posts','posts.user_id','users.user_id')
+        .count('posts.post_id', { as: 'numPost' }).groupBy('users.user_id');
     }
     async findByUsername(keyword) {
         return await this.users

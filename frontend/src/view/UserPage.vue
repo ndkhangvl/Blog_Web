@@ -26,7 +26,7 @@ export default {
         PostList,
     },
     props: {
-        username: { type: Object, required: true },
+        username: { type: String, required: true },
     },
     //The full code will be presented below
     data() {
@@ -60,7 +60,7 @@ export default {
         async getUser(username) {
             try {
                 this.user = await blogService.getUserBy(username);
-                console.log(this.user);
+                //console.log(this.user);
             } catch (error) {
                 console.log(error);
                 this.$router.push({
