@@ -13,8 +13,8 @@ export default {
 
     mounted() {
         console.log(this.userAuth);
-        console.log(this.post.user_usname);
-        console.log(this.userAuth.data.user_usname);
+        // console.log(this.post.user_usname);
+        // console.log(this.userAuth.data.user_usname);
     },
 
     props: {
@@ -43,10 +43,10 @@ export default {
 
         checkUser() {
             try {
-                if(this.userAuth.data.user_usname == this.post.user_usname ) {
+                if (this.userAuth.data.user_usname == this.post.user_usname) {
                     return true;
                 } else {
-                    return;
+                    return false;
                 }
             } catch (error) {
 
@@ -54,12 +54,14 @@ export default {
         },
 
         async clearPost(postid) {
-            try {
-                await blogService.deletePost(postid);
-                this.$toast.success('Xóa bài viết thành công');
-                this.$router.push('/')
-            } catch (error) {
-                console.log(error);
+            if (confirm('Bạn muốn xóa liên hệ này?')) {
+                try {
+                    await blogService.deletePost(postid);
+                    this.$toast.error('Xóa bài viết thành công');
+                    this.$router.push('/')
+                } catch (error) {
+                    console.log(error);
+                }
             }
         }
 

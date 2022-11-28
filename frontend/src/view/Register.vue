@@ -11,21 +11,21 @@
         <Field type="text" name="name"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Nhập họ và tên"  v-model= "name" />
-          <ErrorMessage name="name" class="text-sm text-red-800" />
+          <ErrorMessage name="name" class="mt-2 text-xs text-red-600 dark:text-red-400" />
       </div>
       <div class="mb-6">
         <label for="text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tên tài khoản</label>
         <Field type="text" name="username"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Nhập tên tài khoản" v-model= "username" />
-          <ErrorMessage name="username" class="text-sm text-red-800" />
+          <ErrorMessage name="username" class="mt-2 text-xs text-red-600 dark:text-red-400" />
       </div>
       <div class="mb-6">
         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mật khẩu</label>
         <Field type="password" name="password"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Nhập mật khẩu" v-model= "password" />
-          <ErrorMessage name="password" class="text-sm text-red-800" />
+          <ErrorMessage name="password" class="mt-2 text-xs text-red-600 dark:text-red-400" />
       </div>
       <div class="mb-6">
         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nhập lại mật
@@ -33,7 +33,7 @@
         <Field type="password" name="repassword"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Nhập lại mật khẩu" v-model= "repassword" />
-          <ErrorMessage name="repassword" class="text-sm text-red-800" />
+          <ErrorMessage name="repassword" class="mt-2 text-xs text-red-600 dark:text-red-400" />
       </div>
       <div class="col-end-8 col-span-3">
                     <a class="">Có tài khoản?  </a>
