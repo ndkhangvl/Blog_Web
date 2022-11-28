@@ -1,4 +1,5 @@
 <template>
+
     <div v-if="isAuth">
         <div class="grid grid-cols-2 mx-auto">
             <div>
@@ -15,9 +16,7 @@
                         <div class="mb-6">
                             <label for="text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tiêu
                                 đề</label>
-                            <!-- <Field type="number" name="iduser"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Nhập tiêu đề" v-model="iduser" /> -->
+                            
                             <Field type="text" name="title"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Nhập tiêu đề" v-model="title" />
@@ -40,9 +39,11 @@
                 </div>
             </div>
         </div>
+
     </div>
     <div v-else class="flex justify-center">
         Vui lòng&nbsp;<router-link to="/login" class="text-primary">Đăng nhập</router-link>&nbsp;để thực hiện chức năng này
+
     </div>
 </template>
 <script>
@@ -100,7 +101,7 @@ export default {
                 .string()
                 .required('Tên tiêu đề không thể bỏ trống.')
                 .min(2, "Tiêu đề không thể ít hơn 2 kí tự")
-                .max(50, "Tiêu đề không thể quá 50 kí tự"),
+                .max(200, "Tiêu đề không thể quá 200 kí tự"),
             post: yup
                 .string()
                 .required('Nội dung không thể bỏ trống.')
