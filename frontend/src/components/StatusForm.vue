@@ -6,7 +6,7 @@
                 Không có bài viết nào
             </p>
         </div>
-        <div class="w-[95%] my-2 flex-shrink-0 rounded-lg shadow-lg bg-white p-2">
+        <div class="w-1/2 my-2 flex-shrink-0 rounded-lg shadow-lg bg-white p-2 fixed">
             <Form :validation-schema="formSchema" @submit="createpost">
             <div class="mb-6">
                 <label for="text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tiêu đề</label>

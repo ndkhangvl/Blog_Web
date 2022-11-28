@@ -17,7 +17,11 @@ export default {
 <template>
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-3">
         <div v-for="(user, index) in users" :key="user.user_id" :class="{ active: index === activeIndex }" >
-            <div class="rounded-lg shadow-lg bg-white my-2 mx-2 h-36">
+            <router-link :to="{
+                        name: 'UserPage',
+                        params: { username: user.user_usname },
+                    }">
+                <div class="rounded-lg shadow-lg bg-white my-2 mx-2 h-36">
                 <div class="p-7">
                     <div class="text-gray-900 text-base font-medium mb-2">
                         {{ user.user_name }}
@@ -27,6 +31,7 @@ export default {
                     </div>
                 </div>
             </div>
+            </router-link>
         </div>
     </div>
 </template>

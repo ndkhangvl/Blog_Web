@@ -12,39 +12,39 @@ export default {
         updateActiveIndex(index) {
             this.$emit('update:activeIndex', index);
         },
-        async likeCheck(postid) {
-            //document.getElementById(`like`+postid).innerHTML = "Hi";
-            this.messageLike = "";
-            ;
-            try {
-                var islike = await blogService.checkLike(useAuthStore().userAuth.data.user_id, postid);
-                if (islike != "") {
-                    console.log("likebutton: ", islike);
-                    this.messageLike = "Hủy thích";
-                    console.log("Huy thich");
-                } else {
-                    this.messageLike = "Thích";
-                    console.log("Thich");
-                };
+        // async likeCheck(postid) {
+        //     //document.getElementById(`like`+postid).innerHTML = "Hi";
+        //     this.messageLike = "";
+        //     ;
+        //     try {
+        //         var islike = await blogService.checkLike(useAuthStore().userAuth.data.user_id, postid);
+        //         if (islike != "") {
+        //             console.log("likebutton: ", islike);
+        //             this.messageLike = "Hủy thích";
+        //             console.log("Huy thich");
+        //         } else {
+        //             this.messageLike = "Thích";
+        //             console.log("Thich");
+        //         };
 
 
-            } catch (error) {
-                console.log(error);
-            }
-        },
-        async likeAction(postid) {
-            try {
-                await blogService.actionLike(useAuthStore().userAuth.data.user_id, postid);
-                console.log("Change like state successful");
-                this.likeCheck(postid);
-            } catch (error) {
-                console.log(error);
-            }
-        },
-        concatMes(string1, string2) {
-            console.log("newstring: ", string1 + string2);
-            return string1 + string2;
-        }
+        //     } catch (error) {
+        //         console.log(error);
+        //     }
+        // },
+        // async likeAction(postid) {
+        //     try {
+        //         await blogService.actionLike(useAuthStore().userAuth.data.user_id, postid);
+        //         console.log("Change like state successful");
+        //         this.likeCheck(postid);
+        //     } catch (error) {
+        //         console.log(error);
+        //     }
+        // },
+        // concatMes(string1, string2) {
+        //     console.log("newstring: ", string1 + string2);
+        //     return string1 + string2;
+        // }
     },
     computed: {
         isAuth() {
@@ -98,12 +98,15 @@ export default {
                         </div>
                     </router-link>
                 </div>
-                <div class="flex justify-end">
+                <!--
+<div class="flex justify-end">
                     <div v-if="isAuth" v-on:click="likeAction(post.post_id)"
                         class="mx-7 mb-4 btn btn-outline-secondary text-white bg-blue-700">
                         <div v-bind:on-change="likeCheck(post.post_id)"> Thích </div>
                     </div>
                 </div>
+                -->
+                
             </div>
         </li>
     </ul>

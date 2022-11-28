@@ -35,7 +35,8 @@ const routes = [
     {
         path: '/posts/:id',
         name: 'post.show',
-        component: () => import('@/view/PostShow.vue'),
+        //component: () => import('@/view/PostShow.vue'),
+        component: () => import('@/components/PostForm2.vue'),
         props: (route) => ({ postId: parseInt(route.params.id) })
     },
     {
