@@ -1,12 +1,15 @@
 <template>
     <div class="grid grid-cols-2 mx-auto">
-        <div class="w-full flex-grow mx-auto">
+        <div>
+            <div class="w-full flex-grow mx-auto">
             <PostList v-if="filteredPostsCount > 0" :posts="filteredPosts" />
             <p v-else>
                 Không có bài viết nào
             </p>
         </div>
-        <div class="w-1/2 my-2 flex-shrink-0 rounded-lg shadow-lg bg-white p-2 fixed">
+        </div>
+        <div class="flex justify-center">
+            <div class="w-1/3 my-2 flex-shrink-0 rounded-lg shadow-lg bg-white p-2 fixed">
             <Form :validation-schema="formSchema" @submit="createpost">
             <div class="mb-6">
                 <label for="text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tiêu đề</label>
@@ -32,6 +35,8 @@
             </div>
         </Form>
         </div>
+        </div>
+        
     </div>
 </template>
 <script>

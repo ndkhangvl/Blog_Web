@@ -1,11 +1,16 @@
 <template>
 
     <div v-if="user" class="grid grid-cols-2">
-        <UserForm :user="user" class="w-[95%] flex justify-center"/>
-        <PostList v-if="filteredPostsCount > 0" :posts="filteredPosts" />
+        <div class="flex justify-center">
+            <UserForm :user="user" class="w-1/3 flex justify-center fixed"/>
+        </div>
+        <div>
+            <PostList v-if="filteredPostsCount > 0" :posts="filteredPosts"/>
         <p v-else>
             Không có bài viết nào
         </p>
+        </div>
+        
     </div>
 
 

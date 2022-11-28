@@ -12,13 +12,14 @@ export default {
     },
 
     mounted() {
-        console.log(this.userAuth);
+        // console.log(this.userAuth.data.user_id);
         console.log(this.post.user_usname);
         //console.log(this.userAuth.data.user_usname);
     },
 
     props: {
-        post: { type: Object, required: true }
+        post: { type: Object, required: true },
+        messageLike : { type: String, required: true}
     },
     data() {
         return {
@@ -61,7 +62,37 @@ export default {
             } catch (error) {
                 console.log(error);
             }
-        }
+        },
+        // async likeCheck(postid) {
+        //     //document.getElementById(`like`+postid).innerHTML = "Hi";
+        //     this.messageLike = "";
+        //     ;
+        //     try {
+        //         var islike = await blogService.checkLike(useAuthStore().userAuth.data.user_id, postid);
+        //         if (islike != "") {
+        //             console.log("likebutton: ", islike);
+        //             this.messageLike = "Hủy thích";
+        //             console.log("Huy thich");
+        //         } else {
+        //             this.messageLike = "Thích";
+        //             console.log("Thich");
+        //         };
+
+
+        //     } catch (error) {
+        //         console.log(error);
+        //     }
+        // },
+        async likeAction(postid) {
+            try {
+                await blogService.actionLike(useAuthStore().userAuth.data.user_id, postid);
+                console.log("Change like state successful");
+                //this.likeCheck(postid);
+
+            } catch (error) {
+                console.log(error);
+            }
+        },
 
     },
     computed: {
@@ -107,6 +138,12 @@ export default {
                 {{ post.numLike }}
             </p>
         </div>
+        <div class="flex justify-end">
+                    <div v-if="isAuth" v-on:click="likeAction(post.post_id)"
+                        class="mx-7 mb-4 btn btn-outline-secondary text-white bg-blue-700">
+                        <div> {{ messageLike}} </div>
+                    </div>
+                </div>
         <button v-if="isAuth && checkUser()" v-on:click="clearPost(post.post_id)"
             class="tracking-widest bg-primary min-w-full h-12 focus:bg-secondary hover:bg-secondary text-white rounded-lg text-2xl marlene-btn"
             type="submit">Xóa bài viết</button>
