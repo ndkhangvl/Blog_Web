@@ -158,7 +158,7 @@ export default {
                     </h5>
                 </div>
 
-                <p class="text-gray-700 text-base mb-4">
+                <p class="text-gray-700 text-base mb-4" style="white-space: pre-line">
                     {{ post.post_content }}
                 </p>
                 <div class="text-gray-700 text-sm mb-4 ml-100 flex justify-end">

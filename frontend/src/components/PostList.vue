@@ -78,7 +78,7 @@ export default {
                             {{ post.post_title }}
                         </h5>
                     </div>
-                    <p class="text-gray-700 text-base mb-4 line-clamp-4">
+                    <p class="text-gray-700 text-base mb-4 line-clamp-4" style="white-space: pre-line">
                         {{ post.post_content }}
                     </p>
 
