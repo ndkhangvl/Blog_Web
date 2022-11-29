@@ -31,3 +31,11 @@ content-type: application/json
 GET http://localhost:3000/api/likes?userid=1&postid=57
 ###
 GET http://localhost:3000/api/users/ndkhang/get-post
+###
+PUT http://localhost:3000/api/users/ndkhang/change-password HTTP/1.1
+content-type: application/json
+
+{
+    "user_passwd": "ndkhang1"
+
+}

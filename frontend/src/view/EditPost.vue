@@ -1,8 +1,8 @@
 <template>
-    <div class="container" v-if="isAuth">
+    <div class="container mx-auto w-1/2 p-5" v-if="isAuth">
         <Form :validation-schema="formSchema" @submit="updatepost">
         <div class="mb-6">
-            <label for="text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tiêu
+            <label for="text" class="block mb-2 text-sm font- text-gray-900 dark:text-white">Tiêu
                 đề</label>
 
             <Field type="text" name="title"

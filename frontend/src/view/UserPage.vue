@@ -55,6 +55,11 @@ export default {
         filteredPostsCount() {
             return this.filteredPosts.length;
         },
+
+        isAuth() {
+            return useAuthStore().userAuth != null;
+        },
+
     },
     methods: {
         async getUser(username) {

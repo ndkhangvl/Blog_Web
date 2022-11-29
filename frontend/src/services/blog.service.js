@@ -57,6 +57,9 @@ class BlogService {
     async deletePost(postid) {
         return (await this.api.delete(`${url}/api/posts/${postid}`)).data;
     }
+    async changepw(username, passwd) {
+        return (await this.api.put(`${url}/api/users/${username}/change-password`, passwd)).data;
+    }
 }
 
 export const blogService = new BlogService();

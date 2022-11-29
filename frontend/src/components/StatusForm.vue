@@ -91,11 +91,6 @@ export default {
     },
     data() {
         const formSchema = yup.object().shape({
-            // iduser: yup
-            //     .string()
-            //     .required('Tên tài khoản không thể bỏ trống.')
-            //     .min(2, "Tiêu đề không thể ít hơn 2 kí tự")
-            //     .max(50, "Tiêu đề không thể quá 50 kí tự"),
             title: yup
                 .string()
                 .required('Tên tiêu đề không thể bỏ trống.')
