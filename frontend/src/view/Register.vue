@@ -99,6 +99,7 @@ export default {
                 this.$router.push('/login');
             } catch (error) {
                 console.log(error);
+                this.$toast.error("Tên tài khoản đã tồn tại");
             }
         },
   },
