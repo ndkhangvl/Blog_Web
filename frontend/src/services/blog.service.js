@@ -60,6 +60,9 @@ class BlogService {
     async changepw(username, passwd) {
         return (await this.api.put(`${url}/api/users/${username}/change-password`, passwd)).data;
     }
+    async changename(username, newname){
+        return (await this.api.put(`${url}/api/users/${username}`, newname)).data;
+    }
 }
 
 export const blogService = new BlogService();
