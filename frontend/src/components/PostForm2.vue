@@ -110,7 +110,7 @@ export default {
                 try {
                     await blogService.deletePost(postid);
                     this.$toast.success('Xóa bài viết thành công');
-                    this.$router.push('/')
+                    this.$router.push('/');
                 } catch (error) {
                     console.log(error);
                 }

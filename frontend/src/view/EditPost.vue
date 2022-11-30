@@ -80,6 +80,7 @@ export default {
                     post_title: this.post.post_title,
                     post_content: this.post.post_content,
                 });
+                this.$router.push('/');
                 this.$toast.success('Sửa bài viết thành công');
             } catch (error) {
                 console.log(error);
