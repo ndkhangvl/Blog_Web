@@ -73,7 +73,7 @@ export default {
             }
         },
         getDateUpdate(dateInSQL) {
-            const date = new Date(dateInSQL).toLocaleDateString('en-US', {
+            const date = new Date(dateInSQL).toLocaleDateString('vi-VN', {
                 //weekday: 'long',
                 year: 'numeric',
                 month: 'long',
