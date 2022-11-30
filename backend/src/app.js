@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-
 const app = express();
 
 const blogController = require('./controller/blog.controller');
@@ -48,6 +47,7 @@ app.route('/api/likes')
 
 //Link Error 404 and status code 500
 const ApiError = require('./api-error');
+const { json } = require('express');
 app.use((req, res, next) => {
     return next(new ApiError(404, 'Resource not found'));
     });

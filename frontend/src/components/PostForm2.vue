@@ -106,12 +106,14 @@ export default {
         },
 
         async clearPost(postid) {
-            try {
-                await blogService.deletePost(postid);
-                this.$toast.success('Xóa bài viết thành công');
-                this.$router.push('/')
-            } catch (error) {
-                console.log(error);
+            if (confirm('Bạn muốn xóa bài viết này?')) {
+                try {
+                    await blogService.deletePost(postid);
+                    this.$toast.success('Xóa bài viết thành công');
+                    this.$router.push('/')
+                } catch (error) {
+                    console.log(error);
+                }
             }
         },
 
